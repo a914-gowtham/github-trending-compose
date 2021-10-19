@@ -67,6 +67,8 @@ dependencies {
     implementation(Dependencies.Compose.material)
     implementation(Dependencies.Compose.tooling)
     implementation(Dependencies.Compose.activity)
+    implementation(Dependencies.Navigation.compose)
+    implementation(Dependencies.Navigation.hilt)
 
     // lifecycle
     implementation(Dependencies.Lifecycle.runtime)
@@ -101,17 +103,26 @@ dependencies {
     testImplementation("com.google.dagger:hilt-android-testing:2.38.1")
     testImplementation("com.google.dagger:hilt-android-compiler:2.38.1")
 
-    // Instrumentation tests
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.38.1")
-    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.38.1")
+   /* // Instrumentation tests
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.35")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.36")
     androidTestImplementation("junit:junit:4.13.2")
-    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1")
+    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.2.1")
     androidTestImplementation("androidx.arch.core:core-testing:2.1.0")
     androidTestImplementation("com.google.truth:truth:1.1.3")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test:core-ktx:1.4.0")
     androidTestImplementation("com.squareup.okhttp3:mockwebserver:4.9.1")
     androidTestImplementation("io.mockk:mockk-android:1.10.5")
-    androidTestImplementation("androidx.test:runner:1.4.0")
-
+    androidTestImplementation("androidx.test:runner:1.4.0")*/
+    // Instrumented Unit Tests
+    androidTestImplementation("junit:junit:4.13.2")
+    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.2.1")
+    androidTestImplementation("androidx.arch.core:core-testing:2.1.0")
+    androidTestImplementation("com.google.truth:truth:1.0.1")
+    androidTestImplementation("androidx.test.ext:junit:1.1.2")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
+    androidTestImplementation("org.mockito:mockito-core:2.28.2")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.35")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.36")
 }

@@ -9,6 +9,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -27,5 +28,14 @@ object DbModule {
     @Singleton
     @Provides
     fun provideTrendingRepoDao(db: GithubDatabase) = db.getTrendingRepoDao()
+
+    @Provides
+    @Named("test_db")
+    fun provideInMemoryDb(@ApplicationContext context: Context): GithubDatabase{
+        return Room.inMemoryDatabaseBuilder(
+            context,
+            GithubDatabase::class.java
+        ).allowMainThreadQueries().build()
+    }
 
 }
