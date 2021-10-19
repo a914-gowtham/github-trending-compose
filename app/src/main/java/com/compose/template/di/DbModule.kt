@@ -29,13 +29,4 @@ object DbModule {
     @Provides
     fun provideTrendingRepoDao(db: GithubDatabase) = db.getTrendingRepoDao()
 
-    @Provides
-    @Named("test_db")
-    fun provideInMemoryDb(@ApplicationContext context: Context): GithubDatabase{
-        return Room.inMemoryDatabaseBuilder(
-            context,
-            GithubDatabase::class.java
-        ).allowMainThreadQueries().build()
-    }
-
 }

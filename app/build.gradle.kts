@@ -3,6 +3,8 @@ plugins {
     id(Plugins.kotlinAndroid)
     id(Plugins.kotlinKapt)
     id(Plugins.hilt)
+    id("kotlinx-serialization")
+
 }
 
 android {
@@ -16,7 +18,7 @@ android {
         versionCode = Config.versionCode
         versionName = Config.versionName
 
-        testInstrumentationRunner = Config.androidTestInstrumentation
+        testInstrumentationRunner = "com.compose.template.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -61,6 +63,7 @@ dependencies {
     implementation(Dependencies.Android.appCompat)
     implementation(Dependencies.Android.material)
     implementation(Dependencies.Android.crypto)
+    implementation(Dependencies.Kotlin.serialization)
 
     // compose
     implementation(Dependencies.Compose.ui)
@@ -99,7 +102,6 @@ dependencies {
     testImplementation("com.google.truth:truth:1.1.3")
     testImplementation("com.squareup.okhttp3:mockwebserver:4.9.1")
     testImplementation("io.mockk:mockk:1.10.5")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:1.1.0-alpha04")
     testImplementation("com.google.dagger:hilt-android-testing:2.38.1")
     testImplementation("com.google.dagger:hilt-android-compiler:2.38.1")
 
@@ -123,6 +125,6 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
     androidTestImplementation("org.mockito:mockito-core:2.28.2")
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.35")
-    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.36")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.38.1")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.38.1")
 }

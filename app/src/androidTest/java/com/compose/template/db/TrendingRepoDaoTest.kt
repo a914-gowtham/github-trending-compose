@@ -1,36 +1,34 @@
 package com.compose.template.db
 
+import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import dagger.hilt.android.testing.HiltAndroidRule
 import kotlinx.coroutines.test.runBlockingTest
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.test.filters.SmallTest
-import com.compose.template.db.dao.TrendingRepoDao
-import com.compose.template.di.DbModule
-import com.compose.template.models.Repository
-import com.google.common.truth.Truth.assertThat
-import dagger.hilt.android.testing.UninstallModules
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import javax.inject.Inject
 import javax.inject.Named
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.test.filters.SmallTest
+import com.compose.template.db.dao.TrendingRepoDao
+import com.compose.template.models.Repository
+import com.google.common.truth.Truth.assertThat
 
 @ExperimentalCoroutinesApi
-@SmallTest
 @HiltAndroidTest
-@UninstallModules(DbModule::class)
+@SmallTest
 class TrendingRepoDaoTest {
 
-    @get:Rule
+    @get:Rule(order = 0)
     var hiltRule = HiltAndroidRule(this)
 
-    @get:Rule
+    @get:Rule(order = 1)
     var instantTaskExecutorRule= InstantTaskExecutorRule()
 
     @Inject
+    @Named("test_db")
     lateinit var database: GithubDatabase
 
     private lateinit var trendingRepoDao: TrendingRepoDao
@@ -44,6 +42,13 @@ class TrendingRepoDaoTest {
     @After
     fun tearDown() {
         database.close()
+    }
+
+    @Test
+    fun dummy_test() {
+        val a=8
+        val b=4
+        assertThat(a+b).isEqualTo(8)
     }
 
     @Test
