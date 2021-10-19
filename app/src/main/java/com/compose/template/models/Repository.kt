@@ -3,7 +3,7 @@ package com.compose.template.models
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "")
+@Entity
 data class Repository(
     @PrimaryKey
     val name: String,
