@@ -31,7 +31,7 @@ class TrendingRepoDaoTest {
     @Named("test_db")
     lateinit var database: GithubDatabase
 
-    private var trendingRepoDao: TrendingRepoDao?=null
+    private lateinit var trendingRepoDao: TrendingRepoDao
 
     @Before
     fun setUp() {
@@ -70,14 +70,22 @@ class TrendingRepoDaoTest {
     @Test
     fun update_New_Repositories() {
         runBlockingTest {
-            val oldRepoList= mutableListOf<Repository>()
-            val oldRepo1= Repository(
-                name = "Pokedex",author = "Me",avatar = "",builtBy = listOf(),currentPeriodStars = 126,
-                description = "a noob project",forks = 20,language = "en",
-                languageColor = "red",stars = 200,url = "https://github.com"
+            val oldRepoList = mutableListOf<Repository>()
+            val oldRepo1 = Repository(
+                name = "Pokedex",
+                author = "Me",
+                avatar = "",
+                builtBy = listOf(),
+                currentPeriodStars = 126,
+                description = "a noob project",
+                forks = 20,
+                language = "en",
+                languageColor = "red",
+                stars = 200,
+                url = "https://github.com"
             )
-            val oldRepo2=oldRepo1.copy(name = "rxKotlin")
-            val oldRepo3=oldRepo1.copy(name = "rxBinder")
+            val oldRepo2 = oldRepo1.copy(name = "rxKotlin")
+            val oldRepo3 = oldRepo1.copy(name = "rxBinder")
             oldRepoList.add(oldRepo1)
             oldRepoList.add(oldRepo2)
             oldRepoList.add(oldRepo3)
@@ -97,4 +105,25 @@ class TrendingRepoDaoTest {
             newRepoList.add(newRepo3)
             trendingRepoDao.insertMultipleRepos(newRepoList)
 
+            val trendingRepos=trendingRepoDao.getAllRepo()
+            assertThat(trendingRepos).containsExactly(newRepoList)
+        }
+    }
+
+    @Test
+    fun delete_All_Repositories() {
+        runBlockingTest {
+            val repo1= Repository(
+                name = "Pokedex",author = "Me",avatar = "",builtBy = listOf(),currentPeriodStars = 126,
+                description = "a noob project",forks = 20,language = "en",
+                languageColor = "red",stars = 200,url = "https://github.com"
+            )
+            val repo2=repo1.copy(name = "rxKotlin")
+            val repo3=repo1.copy(name = "rxBinder")
+            trendingRepoDao.insertMultipleRepos(listOf(repo1,repo2,repo3))
+            trendingRepoDao.nukeTable()
+            val trendingRepos=trendingRepoDao.getAllRepo()
+            assertThat(trendingRepos).isEmpty()
+        }
+    }
 }
