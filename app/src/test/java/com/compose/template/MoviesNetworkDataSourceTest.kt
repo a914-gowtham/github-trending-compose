@@ -81,8 +81,8 @@ class MoviesNetworkDataSourceTest {
 
             response.throttleBody(1024, 1, TimeUnit.SECONDS)
 
-            val responseCode= actual.body() ?: emptyList();
-            assertThat(responseCode).isNotEmpty()
+            val repoList= actual.body() ?: emptyList();
+            assertThat(repoList).isNotEmpty()
         }
     }
 

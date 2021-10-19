@@ -7,8 +7,10 @@ import kotlinx.coroutines.test.runBlockingTest
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.filters.SmallTest
 import com.compose.template.db.dao.TrendingRepoDao
+import com.compose.template.di.DbModule
 import com.compose.template.models.Repository
 import com.google.common.truth.Truth.assertThat
+import dagger.hilt.android.testing.UninstallModules
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -19,6 +21,7 @@ import javax.inject.Named
 @ExperimentalCoroutinesApi
 @SmallTest
 @HiltAndroidTest
+@UninstallModules(DbModule::class)
 class TrendingRepoDaoTest {
 
     @get:Rule
@@ -28,7 +31,6 @@ class TrendingRepoDaoTest {
     var instantTaskExecutorRule= InstantTaskExecutorRule()
 
     @Inject
-    @Named("test_db")
     lateinit var database: GithubDatabase
 
     private lateinit var trendingRepoDao: TrendingRepoDao
@@ -56,7 +58,7 @@ class TrendingRepoDaoTest {
             val repo3=repo1.copy(name = "rxBinder")
             trendingRepoDao.insertMultipleRepos(listOf(repo1,repo2,repo3))
             val trendingRepos=trendingRepoDao.getAllRepo()
-            assertThat(trendingRepos).containsAtLeast(repo1,repo2,repo3)
+            assertThat(trendingRepos).containsExactly(repo1,repo2,repo3)
         }
     }
 
