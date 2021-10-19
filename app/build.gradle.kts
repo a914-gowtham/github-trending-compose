@@ -16,7 +16,7 @@ android {
         versionCode = Config.versionCode
         versionName = Config.versionName
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = Config.androidTestInstrumentation
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -75,12 +75,18 @@ dependencies {
     implementation(Dependencies.Hilt.dependency)
     implementation(Dependencies.Hilt.compiler)
 
-    implementation("com.github.kazemihabib:compose-shimmer:1.0.1")
+    // room
+    implementation(Dependencies.Room.roomRunTime)
+    implementation(Dependencies.Room.roomExt)
+    kapt(Dependencies.Room.roomRunTime)
 
-/*    implementation("io.reactivex.rxjava3:rxjava:3.1.2")
-    implementation("io.reactivex.rxjava3:rxandroid:3.0.0")
-    implementation("io.reactivex.rxjava3:rxkotlin:3.0.1")
-    implementation("com.squareup.retrofit2:adapter-rxjava3:2.9.0")*/
+    implementation(Dependencies.OkHttp.bom)
+    implementation(Dependencies.OkHttp.dependency)
+    implementation(Dependencies.OkHttp.converter)
+    implementation(Dependencies.OkHttp.retrofit)
+    implementation(Dependencies.OkHttp.loggingInterceptor)
+
+    implementation("com.github.kazemihabib:compose-shimmer:1.0.1")
 
 
     // Local unit tests
@@ -92,6 +98,8 @@ dependencies {
     testImplementation("com.squareup.okhttp3:mockwebserver:4.9.1")
     testImplementation("io.mockk:mockk:1.10.5")
     debugImplementation("androidx.compose.ui:ui-test-manifest:1.1.0-alpha04")
+    testImplementation("com.google.dagger:hilt-android-testing:2.38.1")
+    testImplementation("com.google.dagger:hilt-android-compiler:2.38.1")
 
     // Instrumentation tests
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.38.1")

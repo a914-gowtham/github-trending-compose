@@ -7,7 +7,7 @@ object Dependencies {
         const val dependency = "com.squareup.okhttp3:okhttp"
         const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor"
         const val retrofit = "com.squareup.retrofit2:retrofit:2.9.0"
-        const val converter = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
+        const val converter = "com.squareup.retrofit2:converter-gson:2.3.0"
     }
 
     object Kotlin {
@@ -74,6 +74,13 @@ object Dependencies {
         const val plugin = "com.google.dagger:hilt-android-gradle-plugin:$version"
         const val dependency = "com.google.dagger:hilt-android:$version"
         const val compiler = "com.google.dagger:hilt-compiler:$version"
+    }
+
+    object Room {
+        const val version = "2.4.0-alpha02"
+        const val roomRunTime = "androidx.room:room-runtime:$version" //Room
+        const val roomExt = "androidx.room:room-ktx:$version"  //Room
+        const val roomKapt = "androidx.room:room-compiler:$version" //Room
     }
 
     object Testing {
