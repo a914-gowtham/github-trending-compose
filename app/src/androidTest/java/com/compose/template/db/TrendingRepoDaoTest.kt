@@ -31,7 +31,7 @@ class TrendingRepoDaoTest {
     @Named("test_db")
     lateinit var database: GithubDatabase
 
-    private lateinit var trendingRepoDao: TrendingRepoDao
+    private var trendingRepoDao: TrendingRepoDao?=null
 
     @Before
     fun setUp() {
@@ -61,8 +61,8 @@ class TrendingRepoDaoTest {
             )
             val repo2=repo1.copy(name = "rxKotlin")
             val repo3=repo1.copy(name = "rxBinder")
-            trendingRepoDao.insertMultipleRepos(listOf(repo1,repo2,repo3))
-            val trendingRepos=trendingRepoDao.getAllRepo()
+            trendingRepoDao?.insertMultipleRepos(listOf(repo1,repo2,repo3))
+            val trendingRepos=trendingRepoDao?.getAllRepo()
             assertThat(trendingRepos).containsExactly(repo1,repo2,repo3)
         }
     }
@@ -97,25 +97,4 @@ class TrendingRepoDaoTest {
             newRepoList.add(newRepo3)
             trendingRepoDao.insertMultipleRepos(newRepoList)
 
-            val trendingRepos=trendingRepoDao.getAllRepo()
-            assertThat(trendingRepos).containsExactly(newRepoList)
-        }
-    }
-
-    @Test
-    fun delete_All_Repositories() {
-        runBlockingTest {
-            val repo1= Repository(
-                name = "Pokedex",author = "Me",avatar = "",builtBy = listOf(),currentPeriodStars = 126,
-                description = "a noob project",forks = 20,language = "en",
-                languageColor = "red",stars = 200,url = "https://github.com"
-            )
-            val repo2=repo1.copy(name = "rxKotlin")
-            val repo3=repo1.copy(name = "rxBinder")
-            trendingRepoDao.insertMultipleRepos(listOf(repo1,repo2,repo3))
-            trendingRepoDao.nukeTable()
-            val trendingRepos=trendingRepoDao.getAllRepo()
-            assertThat(trendingRepos).isEmpty()
-        }
-    }
 }
