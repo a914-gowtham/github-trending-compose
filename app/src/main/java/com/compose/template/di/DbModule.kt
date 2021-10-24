@@ -2,14 +2,13 @@ package com.compose.template.di
 
 import android.content.Context
 import androidx.room.Room
-import com.compose.template.db.GithubDatabase
+import com.compose.template.db.GithubDb
 import com.compose.template.utils.Constants.GITHUB_DB_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -18,15 +17,14 @@ object DbModule {
 
     @Singleton
     @Provides
-    fun provideGithubDb(@ApplicationContext context: Context): GithubDatabase {
+    fun provideGithubDb(@ApplicationContext context: Context): GithubDb {
         return Room.databaseBuilder(
-            context, GithubDatabase::class.java,
+            context, GithubDb::class.java,
             GITHUB_DB_NAME
         ).build()
     }
 
     @Singleton
     @Provides
-    fun provideTrendingRepoDao(db: GithubDatabase) = db.getTrendingRepoDao()
-
+    fun provideTrendingRepoDao(db: GithubDb) = db.getTrendingRepoDao()
 }

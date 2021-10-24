@@ -4,7 +4,6 @@ plugins {
     id(Plugins.kotlinKapt)
     id(Plugins.hilt)
     id("kotlinx-serialization")
-
 }
 
 android {
@@ -76,14 +75,14 @@ dependencies {
     // lifecycle
     implementation(Dependencies.Lifecycle.runtime)
 
-    // hilt
+    // Hilt
     implementation(Dependencies.Hilt.dependency)
-    implementation(Dependencies.Hilt.compiler)
+    kapt(Dependencies.Hilt.compiler)
 
     // room
     implementation(Dependencies.Room.roomRunTime)
     implementation(Dependencies.Room.roomExt)
-    kapt(Dependencies.Room.roomRunTime)
+    kapt(Dependencies.Room.roomKapt)
 
     implementation(Dependencies.OkHttp.bom)
     implementation(Dependencies.OkHttp.dependency)
@@ -126,5 +125,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
     androidTestImplementation("org.mockito:mockito-core:2.28.2")
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.38.1")
+    androidTestImplementation("com.android.support.test:runner:1.3.0-beta01")
+    androidTestImplementation("org.robolectric:robolectric:4.4")
     kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.38.1")
 }

@@ -1,6 +1,6 @@
 package com.compose.template
 
-import com.compose.template.db.dao.TrendingRepoDao
+import com.compose.template.db.daos.TrendingRepoDao
 import com.compose.template.models.Repository
 import com.compose.template.remote.GithubApi
 import com.compose.template.utils.Resource

@@ -26,12 +26,13 @@ class HomeViewModel @Inject constructor(
     }
 
     fun refreshData() {
-        if (_trendingRepo.value is Resource.Loading)
+        print("sdsddds")
+        /*if (_trendingRepo.value is Resource.Loading)
             return
         _trendingRepo.value = Resource.Loading()
         viewModelScope.launch {
             _trendingRepo.value = mainRepository.fetchRepositories()
-        }
+        }*/
     }
 
 }

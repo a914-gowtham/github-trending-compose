@@ -7,7 +7,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import android.content.Context
 import androidx.room.Room
-import com.compose.template.db.GithubDatabase
+import com.compose.template.db.GithubDb
 import javax.inject.Named
 
 @Module
@@ -16,15 +16,11 @@ object TestDbModule {
 
     @Provides
     @Named("test_db")
-    fun provideInMemoryDb(@ApplicationContext context: Context): GithubDatabase{
+    fun provideInMemoryDb(@ApplicationContext context: Context): GithubDb{
         return Room.inMemoryDatabaseBuilder(
             context,
-            GithubDatabase::class.java
+            GithubDb::class.java
         ).allowMainThreadQueries().build()
     }
 
-    @Provides
-    fun provideStr(): String{
-        return "1"
-    }
 }

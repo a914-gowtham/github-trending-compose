@@ -11,42 +11,42 @@ import org.junit.Test
 import javax.inject.Inject
 import javax.inject.Named
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.test.filters.SmallTest
-import com.compose.template.db.dao.TrendingRepoDao
+import com.compose.template.db.daos.TrendingRepoDao
+import com.compose.template.di.DbModule
 import com.compose.template.models.Repository
 import com.google.common.truth.Truth.assertThat
+import dagger.hilt.android.testing.UninstallModules
 
 @ExperimentalCoroutinesApi
 @HiltAndroidTest
-@SmallTest
 class TrendingRepoDaoTest {
 
-    @get:Rule(order = 0)
+    @get:Rule
     var hiltRule = HiltAndroidRule(this)
 
-    @get:Rule(order = 1)
+    @get:Rule
     var instantTaskExecutorRule= InstantTaskExecutorRule()
 
     @Inject
     @Named("test_db")
-    lateinit var database: GithubDatabase
+    lateinit var db: GithubDb
 
     private lateinit var trendingRepoDao: TrendingRepoDao
 
     @Before
     fun setUp() {
         hiltRule.inject()
-        trendingRepoDao = database.getTrendingRepoDao()
+        trendingRepoDao = db.getTrendingRepoDao()
     }
 
     @After
     fun tearDown() {
-        database.close()
+        db.close()
     }
 
     @Test
     fun dummy_test() {
-        val a=8
+        val a=4
         val b=4
         assertThat(a+b).isEqualTo(8)
     }
@@ -61,8 +61,8 @@ class TrendingRepoDaoTest {
             )
             val repo2=repo1.copy(name = "rxKotlin")
             val repo3=repo1.copy(name = "rxBinder")
-            trendingRepoDao?.insertMultipleRepos(listOf(repo1,repo2,repo3))
-            val trendingRepos=trendingRepoDao?.getAllRepo()
+            trendingRepoDao.insertMultipleRepos(listOf(repo1,repo2,repo3))
+            val trendingRepos= trendingRepoDao.getAllRepo()
             assertThat(trendingRepos).containsExactly(repo1,repo2,repo3)
         }
     }
@@ -106,7 +106,7 @@ class TrendingRepoDaoTest {
             trendingRepoDao.insertMultipleRepos(newRepoList)
 
             val trendingRepos=trendingRepoDao.getAllRepo()
-            assertThat(trendingRepos).containsExactly(newRepoList)
+            assertThat(trendingRepos).containsExactlyElementsIn(newRepoList)
         }
     }
 
