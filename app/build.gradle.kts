@@ -118,11 +118,11 @@ dependencies {
     androidTestImplementation("androidx.test:runner:1.4.0")*/
     // Instrumented Unit Tests
     androidTestImplementation("junit:junit:4.13.2")
-    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.2.1")
+    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1")
     androidTestImplementation("androidx.arch.core:core-testing:2.1.0")
-    androidTestImplementation("com.google.truth:truth:1.0.1")
-    androidTestImplementation("androidx.test.ext:junit:1.1.2")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
+    androidTestImplementation("com.google.truth:truth:1.1.3")
+    androidTestImplementation("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
     androidTestImplementation("org.mockito:mockito-core:2.28.2")
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.38.1")
     androidTestImplementation("com.android.support.test:runner:1.3.0-beta01")
